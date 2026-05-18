@@ -4,7 +4,7 @@ Farklı yemek platformlarından (Getir Yemek, Trendyol Go, Yemeksepeti) çekilen
 
 ## Veritabanı Şeması
 
-![Veritabanı Şeması](veritabani_semasi.png)
+![Veritabanı Şeması](images/veritabani_semasi.png)
 
 ## Kurulum
 
@@ -54,25 +54,41 @@ python json_to_db.py --istatistik
 | `kategoriler` | Menü kategorileri (Pizza, İçecek...) |
 | `urunler` | Ürünler, fiyatlar, indirim bilgisi |
 
-## Örnek Sorgular
+## Örnek Sorgu Çıktıları
+
+### Veritabanı İstatistikleri
 
 ```sql
--- Tantuni fiyatlarını karşılaştır
-SELECT u.ad, u.fiyat, r.ad AS restoran
-FROM urunler u
-JOIN restoranlar r ON u.restoran_id = r.id
-WHERE u.ad ILIKE '%tantuni%'
-ORDER BY u.fiyat;
-
--- En yüksek puanlı restoranlar
-SELECT ad, puan, puan_sayisi
-FROM restoranlar
-ORDER BY puan DESC
-LIMIT 10;
-
--- Veritabanı istatistikleri
 SELECT 
     (SELECT COUNT(*) FROM restoranlar) AS restoran_sayisi,
     (SELECT COUNT(*) FROM urunler) AS urun_sayisi,
     (SELECT COUNT(*) FROM kategoriler) AS kategori_sayisi;
 ```
+
+![İstatistikler](images/sorgu1_istatistik.png)
+
+### Tantuni Fiyat Karşılaştırması
+
+```sql
+SELECT u.ad, u.fiyat, r.ad AS restoran
+FROM urunler u
+JOIN restoranlar r ON u.restoran_id = r.id
+WHERE u.ad ILIKE '%tantuni%'
+ORDER BY u.fiyat
+LIMIT 10;
+```
+
+![Tantuni Karşılaştırma](images/sorgu2_tantuni.png)
+
+### En Yüksek Puanlı Restoranlar
+
+```sql
+SELECT ad, puan, puan_sayisi
+FROM restoranlar
+ORDER BY puan DESC
+LIMIT 10;
+```
+
+![Puanlar](images/sorgu3_puanlar.png)
+
+
