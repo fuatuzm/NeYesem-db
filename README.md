@@ -4,7 +4,7 @@ Farklı yemek platformlarından (Getir Yemek, Trendyol Go, Yemeksepeti) çekilen
 
 ## Veritabanı Şeması
 
-![Veritabanı Şeması](veritabani-semasi.png)
+![Veritabanı Şeması](veritabani_semasi.png)
 
 ## Kurulum
 
