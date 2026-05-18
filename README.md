@@ -2,6 +2,10 @@
 
 Farklı yemek platformlarından (Getir Yemek, Trendyol Go, Yemeksepeti) çekilen verileri PostgreSQL veritabanına kaydeden ve karşılaştırma yapan modül.
 
+## Veritabanı Şeması
+
+![Veritabanı Şeması](veritabani-semasi.png)
+
 ## Kurulum
 
 ### 1. PostgreSQL
@@ -19,9 +23,13 @@ psql -U postgres -d ne_yesem -f schema.sql
 pip install -r requirements.txt
 ```
 
-### 3. Veritabanı Şifresini Ayarla
+### 3. Ortam Değişkenleri
 
-`json_to_db.py` dosyasındaki `DB_CONFIG` bölümünde şifrenizi güncelleyin.
+`.env.example` dosyasını `.env` olarak kopyalayın ve kendi şifrenizi yazın:
+
+```bash
+cp .env.example .env
+```
 
 ## Kullanım
 
@@ -61,10 +69,10 @@ SELECT ad, puan, puan_sayisi
 FROM restoranlar
 ORDER BY puan DESC
 LIMIT 10;
+
+-- Veritabanı istatistikleri
+SELECT 
+    (SELECT COUNT(*) FROM restoranlar) AS restoran_sayisi,
+    (SELECT COUNT(*) FROM urunler) AS urun_sayisi,
+    (SELECT COUNT(*) FROM kategoriler) AS kategori_sayisi;
 ```
-
-## Proje Ekibi
-
-- **Veritabanı:** [Senin adın]
-- **Backend/Scraper:** [Arkadaşının adı]
-- **Frontend:** [Diğer arkadaşlar]
